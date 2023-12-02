@@ -26,7 +26,7 @@ const nodeDistance = 100
 const width = (500) + numPoints * nodeDistance
 const minHeight = 300
 const maxHeight = parseInt(graphElement.getAttribute('height'), 10)
-const curveHeigth = 30
+const curveHeight = 30
 
 //  Setting width dynamically based on number of points and node distance.
 graphElement.setAttribute('width', width)
@@ -37,7 +37,7 @@ const points = Array.from({ length: numPoints }, (_, i) => {
     stepHeight += 2;
     return {
         x: (i / (numPoints - 1)) * width,
-        y: Math.floor((random()) * (maxHeight - curveHeigth - minHeight + 1)) + minHeight - stepHeight,
+        y: Math.floor((random()) * (maxHeight - curveHeight - minHeight + 1)) + minHeight - stepHeight,
     }
 })
 
