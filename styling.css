@@ -59,10 +59,18 @@ body, html {
   margin-left: 32px  
 }
 
+
 .text-container h1 {
   text-transform: uppercase;
   color: #005148;
+  position: relative;
 }
+
+.text-container h1::before {
+  content: 'vladimir ';
+  display: block;
+}
+
 .text-container p {
   width: 500px;
   color: #052E3B;
