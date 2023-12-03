@@ -1,40 +1,43 @@
-const SEED = 567899;
-const NUM_POINTS = 100;
-const NODE_DISTANCE = 100;
-const MIN_HEIGHT = 300;
-const CURVE_HEIGHT = 30;
-const EVENT_CIRCLE_RADIUS = 36;
-const EVENT_LINE_OFFSET = 80;
-const EVENT_TEXT_OFFSET_X = 45;
-const EVENT_TEXT_OFFSET_Y = 125;
-const AREA_CURVE_OFFSET = 9;
-const CIRCLE_RADIUS = 4;
-const GRADIENT_ROTATION = 67;
-const GRADIENT_START_COLOR = "#10A79E";
-const GRADIENT_END_COLOR = "#1C5B88";
-const LINE_CLASS_BACK = "road-line-back";
-const LINE_CLASS_FRONT = "road-line";
-const LINK_BOX_CLASS = "red-link-box";
-const TRANSPARENT_FILL = "transparent";
-const BLACK_STROKE = "black";
-const RED_FILL = "red";
+// Constants
+const SEED = 567899; // Seed value for random number generation
+const NUM_POINTS = 100; // Number of data points
+const NODE_DISTANCE = 100; // Distance between each data point
+const MIN_HEIGHT = 300; // Minimum height of data points
+const CURVE_HEIGHT = 30; // Height of the curve
+const EVENT_CIRCLE_RADIUS = 36; // Radius of the event circle
+const EVENT_LINE_OFFSET = 80; // Offset of the event line from the data point
+const EVENT_TEXT_OFFSET_X = 45; // X offset of the event text from the data point
+const EVENT_TEXT_OFFSET_Y = 125; // Y offset of the event text from the data point
+const AREA_CURVE_OFFSET = 9; // Offset of the bottom area curve
+const CIRCLE_RADIUS = 4; // Radius of the data point circle
+const GRADIENT_ROTATION = 67; // Rotation angle of the gradient
+const GRADIENT_START_COLOR = "#10A79E"; // Start color of the gradient
+const GRADIENT_END_COLOR = "#1C5B88"; // End color of the gradient
+const LINE_CLASS_BACK = "road-line-back"; // CSS class for the back line
+const LINE_CLASS_FRONT = "road-line"; // CSS class for the front line
+const LINK_BOX_CLASS = "red-link-box"; // CSS class for the link box
+const TRANSPARENT_FILL = "transparent"; // Transparent fill color
+const BLACK_STROKE = "black"; // Stroke color for the lines
+const RED_FILL = "red"; // Fill color for the data points
 
-let seed = SEED;
+let seed = SEED; // Seed value for random number generation
 
+// Generate a random value between 0 and 1
 function generateRandom() {
     const randomValue = Math.sin(seed++) * 100000;
     return randomValue - Math.floor(randomValue);
 }
 
+// Event handler for when a data point is clicked
 const onPointClicked = index => {
     console.log(index);
     addEventMarker([index]);
 };
 
+// Setup the SVG container
 const setupSvgContainer = () => {
     const svg = d3.select("#svg-container");
     const graphElement = document.getElementById("svg-container");
-
 
     const width = (500) + NUM_POINTS * NODE_DISTANCE;
     const maxHeight = parseInt(graphElement.getAttribute('height'), 10);
@@ -43,9 +46,10 @@ const setupSvgContainer = () => {
     return { svg, graphElement, width, maxHeight };
 };
 
+// Initialize the SVG container
 const { svg, graphElement, width, maxHeight } = setupSvgContainer();
 
-
+// Generate the data points
 const generatePoints = () => {
     let stepHeight = 0;
     return Array.from({ length: NUM_POINTS }, (_, i) => {
@@ -57,16 +61,18 @@ const generatePoints = () => {
     });
 };
 
-const points = generatePoints();
+const points = generatePoints(); // Generate the data points
 
-const events = [4, 6, 10];
+const events = [4, 6, 10]; // Array of event indices
 
+// Add event markers to the SVG
 const addEventMarker = drawEvents => {
     drawEventCircle(svg, points, drawEvents);
     drawEventLine(svg, points, drawEvents);
     drawEventText(svg, points, drawEvents);
 };
 
+// Draw event circles on the SVG
 const drawEventCircle = (svg, points, drawEvents) => {
     svg.selectAll("eventCircle")
         .data(drawEvents)
@@ -76,9 +82,10 @@ const drawEventCircle = (svg, points, drawEvents) => {
         .attr("r", EVENT_CIRCLE_RADIUS)
         .attr("fill-opacity", "0")
         .attr("stroke", "#036974")
-        .attr("stroke-width", "3")
+        .attr("stroke-width", "3");
 };
 
+// Draw event lines on the SVG
 const drawEventLine = (svg, points, drawEvents) => {
     const eventLine = d3.line()
         .x(event => event[0])
@@ -91,11 +98,11 @@ const drawEventLine = (svg, points, drawEvents) => {
             [points[eventIndex].x, points[eventIndex].y - EVENT_LINE_OFFSET + EVENT_CIRCLE_RADIUS]
         ]))
         .attr("stroke", "#036974")
-        .attr("stroke-width", "2")
+        .attr("stroke-width", "2");
 };
 
+// Draw event text on the SVG
 const drawEventText = (svg, points, drawEvents) => {
-
     svg.selectAll("text")
         .data(drawEvents)
         .enter().insert("text", ":first-child")
@@ -107,12 +114,9 @@ const drawEventText = (svg, points, drawEvents) => {
         .attr("fill", "#036974");
 };
 
-addEventMarker(events);
+addEventMarker(events); // Add event markers to the SVG
 
-
-
-
-
+// Create the bottom area curve
 function createBottomArea(maxHeight) {
     return d3.area()
         .x(d => d.x)
@@ -121,6 +125,7 @@ function createBottomArea(maxHeight) {
         .curve(d3.curveNatural);
 }
 
+// Draw the bottom area curve on the SVG
 function drawBottomArea(svg, points, bottomArea) {
     svg.append("path")
         .datum(points)
@@ -128,6 +133,7 @@ function drawBottomArea(svg, points, bottomArea) {
         .attr("class", "bg-bottom");
 }
 
+// Create the line
 function createLine() {
     return d3.line()
         .x(d => d.x)
@@ -135,6 +141,7 @@ function createLine() {
         .curve(d3.curveNatural);
 }
 
+// Define the gradient for the lines
 function defineGradient(svg) {
     const defs = svg.append("defs");
     const gradient = defs.append("linearGradient")
@@ -147,6 +154,7 @@ function defineGradient(svg) {
     return gradient;
 }
 
+// Draw the lines on the SVG
 function drawLine(svg, points, line) {
     svg.append("path")
         .datum(points)
@@ -163,6 +171,7 @@ function drawLine(svg, points, line) {
         .attr("class", LINE_CLASS_FRONT);
 }
 
+// Draw the link boxes on the SVG
 function drawLinkBoxes(svg, points, maxHeight) {
     const boxWidth = points[1].x - points[0].x;
 
@@ -179,6 +188,7 @@ function drawLinkBoxes(svg, points, maxHeight) {
         .style("fill", TRANSPARENT_FILL);
 }
 
+// Draw the data points on the SVG
 function drawDataPoints(svg, points) {
     svg.selectAll("circle")
         .data(points)
@@ -189,12 +199,12 @@ function drawDataPoints(svg, points) {
         .attr("fill", RED_FILL);
 }
 
-const bottomArea = createBottomArea(maxHeight);
-drawBottomArea(svg, points, bottomArea);
+const bottomArea = createBottomArea(maxHeight); // Create the bottom area curve
+drawBottomArea(svg, points, bottomArea); // Draw the bottom area curve on the SVG
 
-const line = createLine();
-defineGradient(svg);
-drawLine(svg, points, line);
+const line = createLine(); // Create the line
+defineGradient(svg); // Define the gradient for the lines
+drawLine(svg, points, line); // Draw the lines on the SVG
 
-drawLinkBoxes(svg, points, maxHeight);
-drawDataPoints(svg, points);
+drawLinkBoxes(svg, points, maxHeight); // Draw the link boxes on the SVG
+drawDataPoints(svg, points); // Draw the data points on the SVG
