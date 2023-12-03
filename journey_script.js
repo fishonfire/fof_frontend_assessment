@@ -1,5 +1,16 @@
-function random() {
-    var x = Math.sin(seed++) * 100000
+// Constants for configuration
+const CONFIG = {
+    seed: 567899,
+    numPoints: 100,
+    nodeDistance: 100,
+    minHeight: 300,
+    curveHeight: 30,
+    eventCircleRadius: 36,
+    boxWidthFactor: 2,
+};
+
+function seededRandom() {
+    var x = Math.sin(CONFIG.seed++) * 100000
     return x - Math.floor(x)
 }
 
@@ -15,29 +26,27 @@ const svg = d3.select("#svg-container")
 window.svg = svg
 const graphElement = document.getElementById("svg-container")
 
-// Set a seed for reproducibility
-let seed = 567899
 
-// Number of vertical points
-const numPoints = 100
 
-// Height range for the points
-const nodeDistance = 100
-const width = (500) + numPoints * nodeDistance
-const minHeight = 300
+
+
+
+const width = (500) + CONFIG.numPoints * CONFIG.nodeDistance
 const maxHeight = parseInt(graphElement.getAttribute('height'), 10)
-const curveHeight = 30
 
+function calculateWidth() {
+    return (500) + CONFIG.numPoints * CONFIG.nodeDistance;
+}
 //  Setting width dynamically based on number of points and node distance.
-graphElement.setAttribute('width', width)
+graphElement.setAttribute('width', calculateWidth())
 
 // Generate random vertical points
 let stepHeight = 0
-const points = Array.from({ length: numPoints }, (_, i) => {
-    stepHeight += 2;
+const points = Array.from({ length: CONFIG.numPoints }, (_, i) => {
+    stepHeight += CONFIG.boxWidthFactor;
     return {
-        x: (i / (numPoints - 1)) * width,
-        y: Math.floor((random()) * (maxHeight - curveHeight - minHeight + 1)) + minHeight - stepHeight,
+        x: (i / (CONFIG.numPoints - 1)) * width,
+        y: Math.floor((seededRandom()) * (maxHeight - CONFIG.curveHeight - CONFIG.minHeight + 1)) + CONFIG.minHeight - stepHeight,
     }
 })
 
@@ -49,7 +58,7 @@ function drawEventLine(drawEvents) {
         .enter().insert("circle", ":first-child")
         .attr("cx", eventIndex => points[eventIndex].x)
         .attr("cy", eventIndex => points[eventIndex].y - 80)
-        .attr("r", 36)
+        .attr("r", CONFIG.eventCircleRadius)
         .attr("fill-opacity", "0")
         .attr("stroke", "#036974")
         .attr("stroke-width", "3")
@@ -63,7 +72,7 @@ function drawEventLine(drawEvents) {
         .enter().insert("path", ":first-child")
         .attr("d", eventIndex => eventLine([
             [points[eventIndex].x, points[eventIndex].y],
-            [points[eventIndex].x, points[eventIndex].y - 80 + 36]
+            [points[eventIndex].x, points[eventIndex].y - 80 + CONFIG.eventCircleRadius]
         ]))
         .attr("stroke", "#036974")
         .attr("stroke-width", "2")
