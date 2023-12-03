@@ -23,7 +23,7 @@ const RED_FILL = "red"; // Fill color for the data points
 let seed = SEED; // Seed value for random number generation
 
 // Generate a random value based on seed
-function generateSeedBasedSeed() {
+function generateRandomValueBasedOnSeed() {
     const randomValue = Math.sin(seed++) * 100000;
     return randomValue - Math.floor(randomValue);
 }
@@ -56,7 +56,7 @@ const generatePoints = () => {
         stepHeight += 2;
         return {
             x: (i / (NUM_POINTS - 1)) * width,
-            y: Math.floor(generateSeedBasedSeed() * (maxHeight - CURVE_HEIGHT - MIN_HEIGHT + 1)) + MIN_HEIGHT - stepHeight,
+            y: Math.floor(generateRandomBasedSeed() * (maxHeight - CURVE_HEIGHT - MIN_HEIGHT + 1)) + MIN_HEIGHT - stepHeight,
         };
     });
 };
