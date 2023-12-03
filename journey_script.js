@@ -7,6 +7,7 @@ const CONFIG = {
     curveHeight: 30,
     eventCircleRadius: 36,
     boxWidthFactor: 2,
+    defaultEvents: [4, 6, 10],
 };
 
 function seededRandom() {
@@ -26,6 +27,7 @@ const svg = d3.select("#svg-container")
 const graphElement = document.getElementById("svg-container")
 graphElement.setAttribute('width', calculateWidth())
 
+
 const maxHeight = parseInt(graphElement.getAttribute('height'), 10)
 
 function calculateWidth() {
@@ -41,8 +43,6 @@ const points = Array.from({ length: CONFIG.numPoints }, (_, i) => {
         y: Math.floor((seededRandom()) * (maxHeight - CONFIG.curveHeight - CONFIG.minHeight + 1)) + CONFIG.minHeight - stepHeight,
     }
 })
-
-const events = [4, 6, 10]
 
 function drawEventLine(drawEvents) {
     svg.selectAll("eventCircle")
@@ -81,7 +81,7 @@ function drawEventLine(drawEvents) {
 
 }
 
-drawEventLine(events)
+drawEventLine(CONFIG.defaultEvents)
 
 // Create an area function
 const bottomArea = d3.area()
@@ -148,3 +148,12 @@ svg.selectAll(".red-link-box")
     .attr("width", boxWidth)
     .attr("height", maxHeight)
     .style("fill", "transparent")
+
+// Draw circles at the data points
+svg.selectAll("circle")
+    .data(points)
+    .enter().append("circle")
+    .attr("cx", d => d.x)
+    .attr("cy", d => d.y)
+    .attr("r", 4)
+    .attr("fill", "red")
