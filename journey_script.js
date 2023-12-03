@@ -22,8 +22,8 @@ const RED_FILL = "red"; // Fill color for the data points
 
 let seed = SEED; // Seed value for random number generation
 
-// Generate a random value between 0 and 1
-function generateRandom() {
+// Generate a random value based on seed
+function generateSeedBasedSeed() {
     const randomValue = Math.sin(seed++) * 100000;
     return randomValue - Math.floor(randomValue);
 }
@@ -56,14 +56,14 @@ const generatePoints = () => {
         stepHeight += 2;
         return {
             x: (i / (NUM_POINTS - 1)) * width,
-            y: Math.floor(generateRandom() * (maxHeight - CURVE_HEIGHT - MIN_HEIGHT + 1)) + MIN_HEIGHT - stepHeight,
+            y: Math.floor(generateSeedBasedSeed() * (maxHeight - CURVE_HEIGHT - MIN_HEIGHT + 1)) + MIN_HEIGHT - stepHeight,
         };
     });
 };
 
 const points = generatePoints(); // Generate the data points
 
-const events = [4, 6, 10]; // Array of event indices
+const eventPointIndices = [4, 6, 10]; // Array of event indices
 
 // Add event markers to the SVG
 const addEventMarker = drawEvents => {
@@ -114,7 +114,7 @@ const drawEventText = (svg, points, drawEvents) => {
         .attr("fill", "#036974");
 };
 
-addEventMarker(events); // Add event markers to the SVG
+addEventMarker(eventPointIndices); // Add event markers to the SVG
 
 // Create the bottom area curve
 function createBottomArea(maxHeight) {
