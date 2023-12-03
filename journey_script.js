@@ -23,29 +23,21 @@ function onPointClicked(index) {
 // SVG container
 const svg = d3.select("#svg-container")
 
-window.svg = svg
 const graphElement = document.getElementById("svg-container")
+graphElement.setAttribute('width', calculateWidth())
 
-
-
-
-
-
-const width = (500) + CONFIG.numPoints * CONFIG.nodeDistance
 const maxHeight = parseInt(graphElement.getAttribute('height'), 10)
 
 function calculateWidth() {
     return (500) + CONFIG.numPoints * CONFIG.nodeDistance;
 }
-//  Setting width dynamically based on number of points and node distance.
-graphElement.setAttribute('width', calculateWidth())
 
 // Generate random vertical points
 let stepHeight = 0
 const points = Array.from({ length: CONFIG.numPoints }, (_, i) => {
     stepHeight += CONFIG.boxWidthFactor;
     return {
-        x: (i / (CONFIG.numPoints - 1)) * width,
+        x: (i / (CONFIG.numPoints - 1)) * calculateWidth(),
         y: Math.floor((seededRandom()) * (maxHeight - CONFIG.curveHeight - CONFIG.minHeight + 1)) + CONFIG.minHeight - stepHeight,
     }
 })
