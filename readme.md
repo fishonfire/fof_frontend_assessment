@@ -30,3 +30,4 @@ Therefore I refactored the JS file for better readability and modularity. and mi
 - Make the SVG graph responsive. 
 - Event title not showing on the newly added marker.
 - Adding test.
+- Few magic numbers "500, and 100000"
