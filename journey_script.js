@@ -1,4 +1,3 @@
-
 const SEED = 567899;
 const NUM_POINTS = 100;
 const NODE_DISTANCE = 100;
