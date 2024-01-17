@@ -9,6 +9,7 @@ Hi developer. This is the frontend assessment for the front end job vacancy @ Fo
 - A refactor on something you dislike
 - A bit of a write down of how you've changed what you dislike
 - Some details on how you've changed that
+- A PR at the end of this :)
 
 ## Important to know
 - You deliver a cloned repository, with your changes. Send us an email with the end result.
