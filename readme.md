@@ -16,6 +16,7 @@ Hi developer. This is the frontend assessment for the front end job vacancy @ Fo
 - Try to stay within 2 hours, there is no need to go crazy with this. But you are free to spend whatever time you feel fit on your refactor
 - If you don't think a refactor is the solution, show us what you think is the solution
 - This assessment is just an extra tool to give us an inside in how you work and where your qualities lie. Don't sweat.
+- You can ignore the Elixir file, but if you are interested, check it out :)
 - Any questions? Email me at simon@fishonfire.com
 
 ---
