@@ -65,7 +65,7 @@ html {
   text-transform: uppercase;
 
   background-color: transparent;
-  border-radius: 4px;
+  border-radius: 0px 0px 5px 5px;
 
   color: black;
   cursor: pointer;
@@ -76,15 +76,23 @@ html {
   justify-content: center;
   align-items: center;
   padding: 16px;
+
 }
 
-.header-button:first {
-  margin-right: 10px
+.header-button.outline {
+  &:hover {
+    background-color: #036974;
+    color: white;
+  }
 }
 
 .header-button.filled {
   background-color: #036974;
   color: white;
+
+  &:hover {
+    background-color: #005148;
+  }
 }
 
 .text-container {
