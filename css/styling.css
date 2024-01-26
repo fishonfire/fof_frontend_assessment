@@ -31,6 +31,32 @@ html {
   display: flex;
   flex-direction: row;
   gap: 10px;
+
+}
+
+
+.container,
+.bottom-area {
+  animation-name: animate-slide;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+/* Slide In */
+.animate.slide {
+  animation-name: animate-slide;
+}
+
+@keyframes animate-slide {
+  0% {
+    opacity: 0;
+    transform: translate(0, 20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 }
 
 .header-button {
@@ -73,12 +99,12 @@ html {
 .text-container p {
 
   width: 500px;
+  color: #052E3B;
 
   @media screen and (max-width: 768px) {
     width: 100%;
   }
 
-  color: #052E3B;
 }
 
 #svg-container {
