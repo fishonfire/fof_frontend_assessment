@@ -84,7 +84,6 @@ html {
 
 .header-button {
 
-
   background-color: transparent;
   border-radius: 0px 0px 5px 5px;
 
@@ -97,8 +96,9 @@ html {
   justify-content: center;
   align-items: center;
   padding: 8px;
-
+  width: fit-content;
   text-decoration: none;
+  min-width: 100px;
   color: inherit;
 }
 
