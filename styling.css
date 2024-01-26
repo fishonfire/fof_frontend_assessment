@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   padding: 0px;
   margin: 0px;
 }
@@ -20,18 +21,21 @@ body, html {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
   width: 100%;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  padding: 16px;
+  margin-bottom: 16px;
 }
 
 .button-container {
   display: flex;
   flex-direction: row;
+  gap: 10px;
 }
 
 .header-button {
   width: 150px;
-  height: 100px;
+  height: 40px;
 
   text-transform: uppercase;
 
@@ -43,7 +47,10 @@ body, html {
 
   border: 2px solid #036974;
 
-  padding: 32px
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
 }
 
 .header-button:first {
@@ -56,13 +63,14 @@ body, html {
 }
 
 .text-container {
-  margin-left: 32px  
+  margin-left: 32px
 }
 
 .text-container h1 {
   text-transform: uppercase;
   color: #005148;
 }
+
 .text-container p {
   width: 500px;
   color: #052E3B;
