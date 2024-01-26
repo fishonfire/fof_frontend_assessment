@@ -25,6 +25,10 @@ html {
   padding: 16px;
   margin-bottom: 16px;
   border-bottom: 2px solid #036974;
+
+  animation-name: animate-slide-down;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
 }
 
 .button-container {
@@ -37,17 +41,13 @@ html {
 
 .container,
 .bottom-area {
-  animation-name: animate-slide;
-  animation-duration: 1s;
+  animation-name: animate-slide-up;
+  animation-duration: 0.5s;
   animation-timing-function: ease-in-out;
 }
 
-/* Slide In */
-.animate.slide {
-  animation-name: animate-slide;
-}
 
-@keyframes animate-slide {
+@keyframes animate-slide-up {
   0% {
     opacity: 0;
     transform: translate(0, 20px);
@@ -57,6 +57,29 @@ html {
     opacity: 1;
     transform: translate(0, 0);
   }
+}
+
+@keyframes animate-slide-down {
+  0% {
+    opacity: 0;
+    transform: translate(0, -20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes animate-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+
 }
 
 .header-button {
@@ -96,7 +119,13 @@ html {
 }
 
 .text-container {
-  margin-left: 32px
+  margin-left: 32px;
+  opacity: 0;
+  animation-name: animate-fade-in;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
 }
 
 .text-container h1 {
