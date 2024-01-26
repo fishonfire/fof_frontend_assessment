@@ -63,11 +63,12 @@ addGradient(defs);
 drawCurvedLine(svg, points, line);
 drawBoxes(svg, points, maxHeight);
 
-// // Draw circles at the data points
-// svg.selectAll("circle")
-//   .data(points)
-//   .enter().append("circle")
-//   .attr("cx", d => d.x)
-//   .attr("cy", d => d.y)
-//   .attr("r", 4)
-//   .attr("fill", "red")
+svg
+  .selectAll("eventCircle")
+  .data(points)
+  .enter()
+  .append("circle")
+  .attr("cx", (d) => d.x)
+  .attr("cy", (d) => d.y)
+  .attr("r", 4)
+  .attr("fill", "red");
