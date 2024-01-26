@@ -83,9 +83,7 @@ html {
 }
 
 .header-button {
-  height: 40px;
 
-  text-transform: uppercase;
 
   background-color: transparent;
   border-radius: 0px 0px 5px 5px;
@@ -98,8 +96,10 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+  padding: 8px;
 
+  text-decoration: none;
+  color: inherit;
 }
 
 .header-button.outline {
