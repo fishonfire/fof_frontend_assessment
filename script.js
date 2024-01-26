@@ -4,7 +4,7 @@ const NODE_DISTANCE = 100;
 const MIN_HEIGHT = 300;
 const CURVE_HEIGHT = 30;
 const EVENT_LINE_COLOR = "#036974";
-const EVENT_FILL_COLOR = "#036974";
+const EVENT_TEXT_COLOR = "#036974";
 
 const random = () => {
   var x = Math.sin(seed++) * 100000;
@@ -50,16 +50,17 @@ const drawEventLine = (drawEvents) => {
     .attr("stroke-width", "2");
 
   svg
+    .append("g")
     .selectAll("text")
     .data(drawEvents)
     .enter()
     .insert("text", ":first-child")
-    .text((d) => `EVENT TITLE ${d}`)
     .attr("x", (eventIndex) => points[eventIndex].x - 45)
     .attr("y", (eventIndex) => points[eventIndex].y - 125)
     .attr("font-family", "sans-serif")
     .attr("font-size", "14px")
-    .attr("fill", EVENT_FILL_COLOR);
+    .attr("fill", EVENT_TEXT_COLOR)
+    .text((d) => `EVENT TITLE ${d}`);
 };
 
 const createBottomArea = () => {
