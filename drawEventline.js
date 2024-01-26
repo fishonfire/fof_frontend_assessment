@@ -1,9 +1,11 @@
+import { EVENT_CIRCLE_SELECTOR, EVENT_LINE_SELECTOR } from "./constants.js";
+
 const EVENT_LINE_COLOR = "#036974";
 const EVENT_TEXT_COLOR = "#036974";
 
 const drawEventLine = (svg, drawEvents, points) => {
   svg
-    .selectAll("eventCircle")
+    .selectAll(EVENT_CIRCLE_SELECTOR)
     .data(drawEvents)
     .enter()
     .insert("circle", ":first-child")
@@ -20,7 +22,7 @@ const drawEventLine = (svg, drawEvents, points) => {
     .y((event) => event[1]);
 
   svg
-    .selectAll("eventLine")
+    .selectAll(EVENT_LINE_SELECTOR)
     .data(drawEvents)
     .enter()
     .insert("path", ":first-child")

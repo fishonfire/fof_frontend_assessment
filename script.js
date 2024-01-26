@@ -3,11 +3,14 @@ import drawEventLine from "./drawEventline.js";
 import drawCurvedLine from "./drawCurvedLine.js";
 import createBottomArea from "./createBottomArea.js";
 import drawBoxes from "./drawBoxes.js";
-const RANDOM_SEED = 567899;
-const NUM_POINTS = 100;
-const NODE_DISTANCE = 100;
-const MIN_HEIGHT = 300;
-const CURVE_HEIGHT = 30;
+import {
+  CURVE_HEIGHT,
+  EVENT_CIRCLE_SELECTOR,
+  MIN_HEIGHT,
+  NODE_DISTANCE,
+  NUM_POINTS,
+  RANDOM_SEED,
+} from "./constants.js";
 
 const random = () => {
   var x = Math.sin(seed++) * 100000;
@@ -64,7 +67,7 @@ drawCurvedLine(svg, points, line);
 drawBoxes(svg, points, maxHeight);
 
 svg
-  .selectAll("eventCircle")
+  .selectAll(EVENT_CIRCLE_SELECTOR)
   .data(points)
   .enter()
   .append("circle")
